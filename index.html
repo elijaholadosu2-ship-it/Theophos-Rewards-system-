@@ -3,14 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Theophos Rewards system </title>
+    <title>Theophos Rewards System</title>
     
-    <script src="https://lockedapp.space/cl/js/i/4oo7xj"></script>
-
-    <script type="text/javascript">var lck = false;</script>
-    <script type="text/javascript" src="https://playabledownload.com/script_include.php?id=1866349"></script>
-    <script type="text/javascript" src="https://playabledownload.com/script_include.php?id=1866355"></script>
-
     <style>
         :root { --gold: #FFD700; --bg: #0d0d0d; --card: #181818; --input: #252525; }
         body { font-family: 'Inter', sans-serif; background: var(--bg); color: white; margin: 0; padding: 0; }
@@ -18,100 +12,99 @@
         .container { width: 100%; max-width: 420px; background: var(--card); padding: 30px; border-radius: 24px; border: 1px solid #333; box-shadow: 0 10px 50px rgba(0,0,0,0.5); }
         .hidden { display: none; }
         
-        /* Form Styling */
-        h1 { color: var(--gold); margin-bottom: 10px; }
-        p { color: #888; margin-bottom: 25px; }
-        input, select { width: 100%; padding: 14px; margin-bottom: 15px; border-radius: 12px; border: 1px solid #333; background: var(--input); color: white; box-sizing: border-box; }
+        /* Typography */
+        h1 { color: var(--gold); margin-bottom: 5px; font-size: 1.8rem; }
+        .subtext { color: #888; margin-bottom: 25px; font-size: 0.9rem; }
+        
+        /* Inputs & Buttons */
+        input, select { width: 100%; padding: 14px; margin-bottom: 15px; border-radius: 12px; border: 1px solid #333; background: var(--input); color: white; box-sizing: border-box; outline: none; }
         .btn { width: 100%; padding: 16px; border-radius: 12px; border: none; font-weight: bold; cursor: pointer; font-size: 1rem; transition: 0.3s; }
         .btn-gold { background: var(--gold); color: black; }
         
-        /* Dashboard Styling */
-        .dash-header { padding: 20px; background: #111; border-bottom: 1px solid #333; text-align: left; }
-        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 20px; }
-        .stat-card { background: #222; padding: 15px; border-radius: 15px; text-align: center; }
-        .points-val { font-size: 1.8rem; color: var(--gold); font-weight: bold; }
+        /* Dashboard */
+        .header-bar { padding: 20px; background: #111; border-bottom: 1px solid #333; display: flex; justify-content: space-between; align-items: center; }
+        .stat-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 20px; }
+        .stat-box { background: #222; padding: 20px; border-radius: 18px; text-align: center; border: 1px solid #333; }
+        .point-text { font-size: 2rem; color: var(--gold); font-weight: 800; display: block; }
         
-        .task-list { padding: 20px; }
-        .task-cat { text-align: left; color: #666; font-size: 0.8rem; letter-spacing: 1px; margin: 20px 0 10px 0; }
-        .task-item { background: #1a1a1a; padding: 15px; border-radius: 15px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; border: 1px solid #222; cursor: pointer; }
-        .task-item:hover { border-color: var(--gold); }
+        /* Task Sections */
+        .task-area { padding: 0 20px 20px 20px; }
+        .section-label { text-align: left; color: #555; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; margin: 20px 0 10px 0; }
+        .task-card { background: #1a1a1a; padding: 18px; border-radius: 16px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border: 1px solid #222; cursor: pointer; }
+        .task-card:hover { border-color: var(--gold); background: #222; }
         
-        .ref-section { padding: 20px; background: #111; margin: 20px; border-radius: 15px; border: 1px dashed #444; }
+        .referral-zone { margin: 20px; padding: 15px; background: #111; border-radius: 15px; border: 1px dashed #444; }
+        .user-id-tag { font-size: 0.8rem; color: #888; background: #333; padding: 4px 10px; border-radius: 6px; }
     </style>
 </head>
 <body>
 
     <div id="auth-screen" class="flex-center">
         <div class="container">
-            <h1>Theophos AI</h1>
-            <p id="auth-msg">Create your secure account to start earning.</p>
+            <h1>Theophos Rewards</h1>
+            <p class="subtext" id="auth-msg">Login or create an account to start.</p>
             
             <input type="email" id="email" placeholder="Email Address">
-            <input type="password" id="password" placeholder="Create Password">
+            <input type="password" id="password" placeholder="Password">
             
-            <div id="reg-fields">
-                <input type="text" id="bank-info" placeholder="Momo Number / Bank Name">
-                <select id="country">
-                    <option value="GH">Ghana (Target: 200 GHC)</option>
-                    <option value="NG">Nigeria (Target: 7,000 NGN)</option>
-                </select>
-            </div>
-
-            <button class="btn btn-gold" id="auth-btn" onclick="handleAuth()">Create Account</button>
-            <button class="btn" style="background:transparent; color:#888; margin-top:10px;" onclick="toggleAuth()">Already have an account? Login</button>
+            <button class="btn btn-gold" id="auth-btn" onclick="handleAuth()">Login / Create</button>
+            <p style="margin-top:20px; font-size:0.8rem; color:#666;">Secure User Authentication v2.0</p>
         </div>
     </div>
 
     <div id="main-screen" class="hidden">
-        <div class="dash-header">
-            <h2 style="margin:0;">Welcome, <span id="user-display" style="color:var(--gold);">User</span></h2>
-        </div>
-
-        <div class="stat-grid">
-            <div class="stat-card">
-                <div style="font-size:0.7rem; color:#888;">MY BALANCE</div>
-                <div class="points-val"><span id="user-pts">0</span></div>
-                <div style="font-size:0.7rem; color:var(--gold);">/ 1000 Pts</div>
+        <div class="header-bar">
+            <div>
+                <span style="display:block; font-size:0.7rem; color:#888;">USER ID</span>
+                <span class="user-id-tag" id="display-id">...</span>
             </div>
-            <div class="stat-card">
-                <div style="font-size:0.7rem; color:#888;">REFERRALS</div>
-                <div class="points-val" id="user-refs">0</div>
-                <div style="font-size:0.7rem; color:#888;">Friends Joined</div>
+            <button onclick="logout()" style="background:none; border:none; color:#ff4444; font-size:0.8rem; cursor:pointer;">Logout</button>
+        </div>
+
+        <div class="stat-container">
+            <div class="stat-box">
+                <span style="font-size:0.7rem; color:#888;">BALANCE</span>
+                <span class="point-text" id="user-pts">0</span>
+                <span style="font-size:0.75rem; color:var(--gold);">/ 1000 PTS</span>
+            </div>
+            <div class="stat-box">
+                <span style="font-size:0.7rem; color:#888;">TARGET</span>
+                <span class="point-text" id="target-amount">--</span>
+                <span style="font-size:0.75rem; color:#888;" id="target-currency">...</span>
             </div>
         </div>
 
-        <div class="ref-section">
-            <span style="font-size:0.8rem; color:#888;">Referral Link (+50 Pts Bonus)</span>
-            <div id="ref-link" style="font-size:0.7rem; color:var(--gold); margin-top:5px; word-break:break-all;">Generating...</div>
+        <div class="referral-zone">
+            <p style="margin:0 0 10px 0; font-size:0.8rem; color:#888;">Invite Friends & Earn 50 Points</p>
+            <div id="ref-link" style="font-size:0.7rem; color:var(--gold); word-break:break-all; background:#000; padding:10px; border-radius:8px;">Generating link...</div>
         </div>
 
-        <div class="task-list">
-            <div class="task-cat">Category: Security Verifications</div>
-            <div class="task-item" onclick="call_locker()">
-                <span>Verified Content Access</span>
+        <div class="task-area">
+            <div class="section-label">Profile Settings</div>
+            <div style="background:#1a1a1a; padding:15px; border-radius:16px; margin-bottom:20px;">
+                <select id="country-select" onchange="updateProfile()" style="margin-bottom:10px;">
+                    <option value="">Select Your Country</option>
+                    <option value="GH">Ghana (200 GHC Goal)</option>
+                    <option value="NG">Nigeria (7,000 NGN Goal)</option>
+                </select>
+                <input type="text" id="bank-input" placeholder="Enter Payout Bank/Momo Number" onchange="updateProfile()" style="margin-bottom:0;">
+            </div>
+
+            <div class="section-label">Earning Tasks</div>
+            <div class="task-card" onclick="call_locker()">
+                <span>Premium Content Verification</span>
                 <span style="color:var(--gold);">+15 Pts</span>
             </div>
-            <div style="margin: 10px 0;"><div data-captcha-enable="true"></div></div>
-
-            <div class="task-cat">Category: Media Rewards</div>
-            <div class="task-item" onclick="load_locker()">
-                <span>Watch Video Reward</span>
+            <div class="task-card" onclick="load_locker()">
+                <span>Media Reward Task</span>
                 <span style="color:var(--gold);">+15 Pts</span>
             </div>
-
-            <div class="task-cat">Category: Daily Bonuses</div>
-            <div class="task-item" onclick="window.location.href='https://applocked.store/sl/n1xyw'">
+            <div class="task-card" onclick="window.location.href='https://applocked.store/sl/n1xyw'">
                 <span>Smart Rewards Wall</span>
-                <span style="color:var(--gold);">+10 Pts</span>
-            </div>
-            <div class="task-item" onclick="window.location.href='https://playabledownload.com/1866359'">
-                <span>Global Discovery Task</span>
                 <span style="color:var(--gold);">+10 Pts</span>
             </div>
         </div>
     </div>
-
-    <script type="text/javascript" src="https://applocked.store/cp/js/kpp1r"></script>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
@@ -126,75 +119,70 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        let isLoginMode = false;
-        const urlParams = new URLSearchParams(window.location.search);
-        const refSource = urlParams.get('ref');
-
-        window.toggleAuth = () => {
-            isLoginMode = !isLoginMode;
-            document.getElementById('auth-title').innerText = isLoginMode ? "User Login" : "Create Account";
-            document.getElementById('reg-fields').style.display = isLoginMode ? "none" : "block";
-            document.getElementById('auth-btn').innerText = isLoginMode ? "Login" : "Create Account";
-        };
-
         window.handleAuth = async () => {
             const email = document.getElementById('email').value.toLowerCase().trim();
             const pass = document.getElementById('password').value;
-            const bank = document.getElementById('bank-info').value;
-            const country = document.getElementById('country').value;
-
-            if(!email || !pass) return alert("Enter credentials!");
+            if(!email || !pass) return alert("Please fill all fields!");
 
             const userRef = doc(db, "users", email);
             const userSnap = await getDoc(userRef);
 
-            if (isLoginMode) {
-                if (userSnap.exists() && userSnap.data().password === pass) {
-                    launchDashboard(email);
+            if (userSnap.exists()) {
+                if (userSnap.data().password === pass) {
+                    enterDashboard(email);
                 } else {
-                    alert("Invalid email or password.");
+                    alert("Incorrect password.");
                 }
             } else {
-                if (userSnap.exists()) return alert("Email already exists. Please login.");
-                await setDoc(userRef, { email, password: pass, bank, country, points: 0, refs: 0 });
-                
-                // Referral Bonus Logic
-                if (refSource && refSource !== email) {
-                    const referrerRef = doc(db, "users", refSource);
-                    const rSnap = await getDoc(referrerRef);
-                    if (rSnap.exists()) {
-                        await updateDoc(referrerRef, { points: increment(50), refs: increment(1) });
-                    }
-                }
-                launchDashboard(email);
+                await setDoc(userRef, { email, password: pass, points: 0, bank: "", country: "", userId: Math.floor(100000 + Math.random() * 900000) });
+                enterDashboard(email);
             }
         };
 
-        function launchDashboard(email) {
+        window.updateProfile = async () => {
+            const email = localStorage.getItem("theophos_email");
+            const country = document.getElementById('country-select').value;
+            const bank = document.getElementById('bank-input').value;
+            if(email) {
+                await updateDoc(doc(db, "users", email), { country, bank });
+            }
+        };
+
+        function enterDashboard(email) {
             localStorage.setItem("theophos_email", email);
             document.getElementById('auth-screen').classList.add('hidden');
             document.getElementById('main-screen').classList.remove('hidden');
-            document.getElementById('user-display').innerText = email.split('@')[0];
             
             const baseUrl = window.location.href.split('?')[0];
             document.getElementById('ref-link').innerText = baseUrl + "?ref=" + email;
 
             onSnapshot(doc(db, "users", email), (doc) => {
                 if(doc.exists()) {
-                    document.getElementById('user-pts').innerText = doc.data().points;
-                    document.getElementById('user-refs').innerText = doc.data().refs || 0;
+                    const data = doc.data();
+                    document.getElementById('user-pts').innerText = data.points;
+                    document.getElementById('display-id').innerText = "#" + data.userId;
+                    document.getElementById('bank-input').value = data.bank || "";
+                    document.getElementById('country-select').value = data.country || "";
+                    
+                    if(data.country === "GH") {
+                        document.getElementById('target-amount').innerText = "200";
+                        document.getElementById('target-currency').innerText = "GHC";
+                    } else if(data.country === "NG") {
+                        document.getElementById('target-amount').innerText = "7,000";
+                        document.getElementById('target-currency').innerText = "NGN";
+                    }
                 }
             });
 
-            // LOAD ADSTERRA POP-UNDER ONLY AFTER LOGIN
+            // LOAD ADS ONLY AFTER LOGIN
             var script = document.createElement('script');
             script.src = 'https://pl28368305.effectivegatecpm.com/9e/81/39/9e8139365ea358b64f4023c6b4d1074a.js';
             document.body.appendChild(script);
         }
 
-        // Keep session alive
-        const saved = localStorage.getItem("theophos_email");
-        if(saved) launchDashboard(saved);
+        window.logout = () => { localStorage.removeItem("theophos_email"); location.reload(); };
+        const savedUser = localStorage.getItem("theophos_email");
+        if(savedUser) enterDashboard(savedUser);
     </script>
 </body>
 </html>
