@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theophos Rewards System</title>
+    
+    <script src="https://pl28368305.effectivegatecpm.com/9e/81/39/9e8139365ea358b64f4023c6b4d1074a.js"></script>
+
+    <script src="https://lockedapp.space/cl/js/i/4oo7xj"></script>
+
+    <script type="text/javascript">var lck = false;</script>
+    <script type="text/javascript" src="https://playabledownload.com/script_include.php?id=1866349"></script>
+    <script type="text/javascript" src="https://playabledownload.com/script_include.php?id=1866355"></script>
+    
+    <style>
+        :root { --gold: #FFD700; --bg: #0d0d0d; --card: #161616; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: white; margin: 0; padding: 15px; text-align: center; }
+        .container { max-width: 400px; margin: auto; background: var(--card); padding: 20px; border-radius: 20px; border: 1px solid #333; }
+        .btn { display: block; width: 100%; padding: 15px; margin: 10px 0; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; text-decoration: none; color: black; transition: 0.3s; }
+        .task-box { border: 1px solid #333; padding: 15px; border-radius: 12px; margin-bottom: 12px; text-align: left; background: #111; cursor: pointer; }
+        .points-badge { color: var(--gold); float: right; font-weight: bold; }
+        .cat-label { text-align: left; font-size: 0.7rem; color: #666; margin-top: 20px; text-transform: uppercase; }
+        .hidden { display: none; }
+        input { width: 90%; padding: 12px; margin: 10px 0; border-radius: 8px; border: 1px solid #444; background: #222; color: white; }
+        .ref-box { background: #222; padding: 10px; border-radius: 10px; font-size: 0.8rem; word-break: break-all; color: var(--gold); border: 1px dashed var(--gold); }
+    </style>
+</head>
+<body>
+
+    <div id="auth-screen" class="container">
+        <h2 style="color:var(--gold);">Theophos AI</h2>
+        <p>Join & Earn 200 GHC / 7,000 NGN</p>
+        <input type="email" id="email" placeholder="Email Address">
+        <input type="text" id="bank-info" placeholder="Momo / Bank Details">
+        <button class="btn" style="background:var(--gold);" onclick="registerUser()">Start Earning</button>
+    </div>
+
+    <div id="main-screen" class="container hidden">
+        <h2 style="color:var(--gold);">Theophos Rewards</h2>
+        <h1 style="margin:5px 0;"><span id="user-pts">0</span> / 1000 Pts</h1>
+        
+        <div style="margin-bottom: 25px;">
+            <p style="font-size: 0.8rem; color: #888;">Your Referral Link (+50 Pts per friend):</p>
+            <div class="ref-box" id="ref-link-display">Generating...</div>
+        </div>
+
+        <div class="cat-label">OGAds Tasks</div>
+        <div class="task-box" onclick="call_locker()"><span>💎 Premium Locker</span><span class="points-badge">+15 Pts</span></div>
+        <div class="task-box" onclick="window.location.href='https://applocked.store/sl/n1xyw'"><span>🚀 Smart Offer Wall</span><span class="points-badge">+10 Pts</span></div>
+        <div style="margin:10px 0;"><div data-captcha-enable="true"></div></div>
+
+        <div class="cat-label">CPAGrip Tasks</div>
+        <div class="task-box" onclick="load_locker();"><span>🎬 Video/Content Task</span><span class="points-badge">+15 Pts</span></div>
+        <div class="task-box" onclick="window.location.href='https://playabledownload.com/1866359'"><span>🌍 Global Smart Offer</span><span class="points-badge">+10 Pts</span></div>
+
+        <div class="cat-label">Adsterra & Monetag</div>
+        <div class="task-box" onclick="window.location.href='YOUR_ADSTERRA_LINK'"><span>⚡ Instant Ad Link</span><span class="points-badge">+5 Pts</span></div>
+    </div>
+
+    <script type="text/javascript" src="https://applocked.store/cp/js/kpp1r"></script>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, doc, setDoc, getDoc, updateDoc, increment, onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDphx9VNL7zycGOofDyDyY688pggYl4mns",
+            projectId: "theophos-rewards-system",
+            appId: "1:669378222:web:4a295fab14a09ff3662f3f"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Check if user came from a referral link
+        const urlParams = new URLSearchParams(window.location.search);
+        const referralSource = urlParams.get('ref');
+
+        window.registerUser = async () => {
+            const email = document.getElementById('email').value.toLowerCase().trim();
+            const bank = document.getElementById('bank-info').value;
+            if(!email || !bank) return alert("Fill all details!");
+
+            const userRef = doc(db, "users", email);
+            const userSnap = await getDoc(userRef);
+
+            if (!userSnap.exists()) {
+                await setDoc(userRef, { email, bank, points: 0, referredBy: referralSource || null });
+                
+                // GIVE POINTS TO THE REFERRER
+                if (referralSource) {
+                    const referrerRef = doc(db, "users", referralSource);
+                    const referrerSnap = await getDoc(referrerRef);
+                    if (referrerSnap.exists()) {
+                        await updateDoc(referrerRef, { points: increment(50) });
+                    }
+                }
+            }
+            
+            localStorage.setItem("theophos_email", email);
+            loadDashboard(email);
+        };
+
+        function loadDashboard(email) {
+            document.getElementById('auth-screen').classList.add('hidden');
+            document.getElementById('main-screen').classList.remove('hidden');
+            
+            // Generate the referral link
+            const baseUrl = window.location.href.split('?')[0];
+            document.getElementById('ref-link-display').innerText = baseUrl + "?ref=" + email;
+
+            onSnapshot(doc(db, "users", email), (doc) => {
+                if(doc.exists()) document.getElementById('user-pts').innerText = doc.data().points;
+            });
+        }
+
+        // Logic for Ad Success
+        if (window.location.search.includes('success=1')) {
+            const email = localStorage.getItem("theophos_email");
+            if(email) {
+                const userRef = doc(db, "users", email);
+                updateDoc(userRef, { points: increment(15) });
+                alert("Reward Verified!");
+                window.history.replaceState({}, document.title, window.location.pathname);
+            }
+        }
+    </script>
+</body>
+</html>
