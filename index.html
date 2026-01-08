@@ -3,78 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Theophos AI - Earning Center</title>
+    <title>Theophos Rewards - Live Portal</title>
     
-    <script type="text/javascript" src="https://applocked.store/cp/js/kpp1r"></script>
-    <script src="https://lockedapp.space/cl/js/i/4oo7xj"></script>
-
-    <style>
+    <script src="https://lockedapp.space/cl/js/i/4oo7xj"></script> <script type="text/javascript" src="https://playabledownload.com/script_include.php?id=1866349"></script> <style>
         :root { --gold: #FFD700; --bg: #0d0d0d; --card: #1a1a1a; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg); color: white; margin: 0; padding-bottom: 70px; }
-        .container { max-width: 500px; margin: auto; padding: 20px; }
-        
-        /* Balance Section */
-        .balance-hero { background: linear-gradient(135deg, #222, #000); padding: 40px 20px; border-radius: 25px; text-align: center; border: 1px solid #333; margin-top: 20px; }
-        .balance-hero h1 { font-size: 3.5rem; margin: 10px 0; color: var(--gold); }
-
-        /* Task Cards */
-        .offer-card { background: var(--card); border-radius: 20px; padding: 20px; margin-bottom: 15px; border: 1px solid #222; display: flex; justify-content: space-between; align-items: center; }
-        .offer-info b { display: block; font-size: 1rem; color: var(--gold); }
-        .offer-info span { font-size: 0.8rem; color: #777; }
-        .btn-earn { background: var(--gold); color: black; border: none; padding: 12px 20px; border-radius: 12px; font-weight: bold; cursor: pointer; }
-
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: white; margin: 0; padding: 20px; text-align: center; }
+        .balance-card { background: linear-gradient(135deg, #222, #000); padding: 30px; border-radius: 20px; border: 1px solid #333; margin-bottom: 30px; }
+        .points { font-size: 3.5rem; color: var(--gold); font-weight: 900; margin: 10px 0; }
+        .task-box { background: var(--card); border: 1px solid #333; padding: 20px; border-radius: 15px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; text-align: left; }
+        .btn-task { background: var(--gold); color: black; border: none; padding: 12px 20px; border-radius: 10px; font-weight: bold; cursor: pointer; }
         .hidden { display: none !important; }
         input { width: 100%; padding: 15px; margin-bottom: 10px; border-radius: 10px; border: 1px solid #333; background: #222; color: white; box-sizing: border-box; }
     </style>
 </head>
 <body>
 
-    <div id="auth-screen" class="container" style="text-align:center; padding-top:100px;">
-        <h1 style="color:var(--gold);">Theophos AI</h1>
-        <div id="login-box">
+    <div id="auth-screen">
+        <h1 style="color:var(--gold);">THEOPHOS AI</h1>
+        <p style="color:#666;">Login to start earning</p>
+        <div style="max-width:350px; margin:auto;">
             <input type="email" id="email" placeholder="Email Address">
-            <input type="password" id="password" placeholder="Password">
-            <button onclick="handleAuth()" class="btn-earn" style="width:100%; margin-top:10px;">Enter Dashboard</button>
+            <button class="btn-task" onclick="handleAuth()" style="width:100%;">Enter Dashboard</button>
         </div>
     </div>
 
-    <div id="main-app" class="hidden container">
-        <div class="balance-hero">
-            <span>TOTAL EARNINGS</span>
-            <h1 id="user-pts">0</h1>
-            <small style="color:#555;">ID: #<span id="display-id">000000</span></small>
+    <div id="main-app" class="hidden">
+        <div class="balance-card">
+            <small style="color:#888;">CURRENT BALANCE</small>
+            <div class="points" id="user-pts">0</div>
+            <div id="user-id" style="font-size:0.8rem; color:var(--gold);">ID: #------</div>
         </div>
 
-        <h3 style="margin: 30px 0 15px;">Tasks Zone 1 (High Pay)</h3>
+        <h3 style="text-align:left; margin-left:5px;">Premium Tasks</h3>
 
-        <div class="offer-card">
-            <div class="offer-info">
-                <b>OGAds Offerwall</b>
-                <span>Complete 1 offer to earn</span>
-            </div>
-            <button class="btn-earn" onclick="call_locker()">+40 Pts</button>
+        <div class="task-box">
+            <div><b>OGAds Unlocker</b><br><small style="color:#666;">Complete 1 Offer</small></div>
+            <button class="btn-task" onclick="call_locker()">+40 Pts</button>
         </div>
 
-        <div class="offer-card">
-            <div class="offer-info">
-                <b>CPAGrip Video</b>
-                <span>Watch video to unlock</span>
-            </div>
-            <button class="btn-earn" onclick="window.open('https://playabledownload.com/1866359')">+40 Pts</button>
+        <div class="task-box">
+            <div><b>CPAGrip Video</b><br><small style="color:#666;">Watch & Verify</small></div>
+            <button class="btn-task" onclick="window.open('https://playabledownload.com/1866359', '_blank')">+40 Pts</button>
         </div>
 
-        <div class="offer-card">
-            <div class="offer-info">
-                <b>Social Earning Link</b>
-                <span>Stay for 30 seconds</span>
-            </div>
-            <button class="btn-earn" onclick="window.open('https://pl28368305.effectivegatecpm.com/9e/81/39/9e8139365ea358b64f4023c6b4d1074a.js')">+10 Pts</button>
+        <div class="task-box">
+            <div><b>Social Reward</b><br><small style="color:#666;">Stay 30 Seconds</small></div>
+            <button class="btn-task" onclick="window.open('https://pl28368305.effectivegatecpm.com/9e/81/39/9e8139365ea358b64f4023c6b4d1074a.js', '_blank')">+10 Pts</button>
         </div>
 
-        <div style="margin-top:40px; text-align:center;">
-            <p style="color:#666; font-size:0.8rem;">Completed a task but points didn't add?</p>
-            <button onclick="checkVerification()" style="background:#222; color:var(--gold); border:1px solid #444; padding:10px 20px; border-radius:10px; font-size:0.8rem;">Sync Points Now</button>
-        </div>
+        <button onclick="logout()" style="background:none; border:none; color:#ff4444; margin-top:30px; cursor:pointer;">Logout Account</button>
     </div>
 
     <script type="module">
@@ -92,56 +69,43 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
-        let userEmail = "";
 
         window.handleAuth = async () => {
             const email = document.getElementById('email').value.toLowerCase().trim();
-            const pass = document.getElementById('password').value;
-            if(!email || !pass) return alert("Enter details");
+            if(!email) return alert("Enter Email");
 
             const userRef = doc(db, "users", email);
             const snap = await getDoc(userRef);
 
-            if(snap.exists()){
-                if(snap.data().password === pass) launch(email);
-                else alert("Wrong password");
-            } else {
-                await setDoc(userRef, { email, password: pass, points: 0, userId: Math.floor(Math.random()*900000) });
-                launch(email);
+            if(!snap.exists()) {
+                await setDoc(userRef, { email, points: 0, userId: Math.floor(100000 + Math.random()*900000) });
             }
+            localStorage.setItem("theophos_session", email);
+            launch(email);
         };
 
         function launch(email) {
-            userEmail = email;
-            localStorage.setItem("theophos_user", email);
             document.getElementById('auth-screen').classList.add('hidden');
             document.getElementById('main-app').classList.remove('hidden');
 
             onSnapshot(doc(db, "users", email), (doc) => {
                 if(doc.exists()) {
                     document.getElementById('user-pts').innerText = doc.data().points;
-                    document.getElementById('display-id').innerText = doc.data().userId;
+                    document.getElementById('user-id').innerText = "ID: #" + doc.data().userId;
                 }
             });
 
-            // CHECK IF REDIRECTED FROM OFFER
-            if(window.location.search.includes('task=verified')) {
+            // AUTOMATIC POINT CHECKER
+            const params = new URLSearchParams(window.location.search);
+            if(params.get('task') === 'verified') {
                 updateDoc(doc(db, "users", email), { points: increment(40) });
-                alert("Success! +40 Points Added.");
+                alert("Task Verified! +40 Points Added.");
                 window.history.replaceState({}, document.title, window.location.pathname);
             }
         }
 
-        window.checkVerification = () => {
-            // This manually checks if they were supposed to get points
-            if(window.location.search.includes('task=verified')) {
-                alert("Points already synced!");
-            } else {
-                alert("No new completions found. Please finish an offer first.");
-            }
-        };
-
-        const saved = localStorage.getItem("theophos_user");
+        window.logout = () => { localStorage.removeItem("theophos_session"); location.reload(); };
+        const saved = localStorage.getItem("theophos_session");
         if(saved) launch(saved);
     </script>
 </body>
