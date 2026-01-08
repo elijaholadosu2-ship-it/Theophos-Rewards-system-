@@ -3,145 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Theophos Rewards System</title>
+    <title>Theophos Rewards - Professional Portal</title>
     
     <script src="https://lockedapp.space/cl/js/i/4oo7xj"></script>
-    <script type="text/javascript">var lck = false;</script>
     <script type="text/javascript" src="https://playabledownload.com/script_include.php?id=1866349"></script>
 
     <style>
-        :root { --gold: #FFD700; --bg: #0b0b0b; --card: #161616; --text: #e0e0e0; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); margin: 0; overflow-x: hidden; }
+        :root { --gold: #FFD700; --bg: #0d0d0d; --card: #1a1a1a; --success: #4CAF50; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: white; margin: 0; padding-bottom: 70px; }
         
-        /* Sidebar Menu */
-        .sidebar { position: fixed; left: -250px; top: 0; width: 250px; height: 100%; background: #111; transition: 0.3s; z-index: 1000; padding-top: 60px; border-right: 1px solid #333; }
+        /* Layout Components */
+        .sidebar { position: fixed; left: -280px; top: 0; width: 280px; height: 100%; background: #111; transition: 0.4s; z-index: 2000; border-right: 1px solid #333; }
         .sidebar.active { left: 0; }
-        .sidebar a { display: block; padding: 15px 25px; color: white; text-decoration: none; border-bottom: 1px solid #222; }
-        .sidebar a:hover { background: var(--gold); color: black; }
-
-        /* Top Navigation */
-        .top-nav { background: #111; padding: 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333; position: sticky; top: 0; z-index: 999; }
-        .menu-btn { font-size: 24px; cursor: pointer; color: var(--gold); }
+        .top-bar { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: #111; border-bottom: 1px solid #333; position: sticky; top: 0; z-index: 1000; }
         
-        /* Dashboard Containers */
-        .page { padding: 20px; max-width: 600px; margin: auto; display: none; }
+        /* Navigation Buttons */
+        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: #111; display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #333; z-index: 1500; }
+        .nav-item { text-align: center; color: #666; font-size: 0.7rem; cursor: pointer; flex: 1; transition: 0.3s; }
+        .nav-item.active { color: var(--gold); }
+        .nav-item i { display: block; font-size: 1.4rem; margin-bottom: 4px; }
+
+        /* Pages */
+        .page { display: none; padding: 20px; max-width: 500px; margin: auto; animation: slideUp 0.3s ease; }
         .page.active { display: block; }
-        
-        .stat-card { background: linear-gradient(145deg, #1a1a1a, #111); padding: 25px; border-radius: 20px; text-align: center; border: 1px solid #333; margin-bottom: 20px; }
-        .points-big { font-size: 3rem; color: var(--gold); font-weight: 800; margin: 10px 0; }
-        
-        /* Task Styling */
-        .company-box { margin-bottom: 30px; }
-        .company-title { font-size: 0.9rem; color: #666; text-transform: uppercase; margin-bottom: 15px; display: block; border-left: 3px solid var(--gold); padding-left: 10px; }
-        .task-row { background: var(--card); padding: 18px; border-radius: 15px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border: 1px solid #222; cursor: pointer; }
-        .task-row:hover { border-color: var(--gold); }
-        .btn-go { background: var(--gold); color: black; padding: 8px 15px; border-radius: 8px; font-weight: bold; font-size: 0.8rem; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Referral Box */
-        .ref-container { background: #1a1a1a; padding: 20px; border-radius: 15px; border: 1px dashed #444; text-align: center; }
-        .ref-link-box { background: #000; padding: 12px; border-radius: 8px; color: var(--gold); font-size: 0.8rem; margin-top: 10px; word-break: break-all; }
+        /* Professional Task List */
+        .company-tag { color: #555; font-size: 0.7rem; text-transform: uppercase; margin: 25px 0 10px 0; display: block; letter-spacing: 1px; }
+        .task-card { background: #161616; padding: 16px; border-radius: 16px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border: 1px solid #222; }
+        .task-info b { font-size: 0.95rem; display: block; }
+        .task-info small { color: #666; font-size: 0.75rem; }
+        .point-pill { background: rgba(255, 215, 0, 0.1); color: var(--gold); padding: 6px 14px; border-radius: 20px; font-weight: 800; font-size: 0.8rem; }
 
-        /* Auth Screen */
-        #auth-screen { text-align: center; padding: 40px 20px; }
-        input, select { width: 100%; padding: 15px; margin-bottom: 15px; border-radius: 10px; border: 1px solid #333; background: #222; color: white; box-sizing: border-box; }
-        .primary-btn { width: 100%; padding: 16px; background: var(--gold); border: none; border-radius: 10px; font-weight: bold; cursor: pointer; }
-
-        .hidden { display: none; }
+        /* UI Elements */
+        .balance-box { background: linear-gradient(135deg, #222, #111); padding: 30px; border-radius: 24px; border: 1px solid #333; text-align: center; margin-bottom: 20px; }
+        .btn-withdraw { width: 100%; padding: 16px; background: var(--gold); color: black; border: none; border-radius: 12px; font-weight: 800; cursor: pointer; margin-top: 10px; }
+        input, select { width: 100%; padding: 15px; margin-bottom: 12px; border-radius: 10px; border: 1px solid #333; background: #222; color: white; }
+        .hidden { display: none !important; }
     </style>
 </head>
 <body>
 
     <div class="sidebar" id="sidebar">
-        <a href="#" onclick="showPage('dash-page')">🏠 Dashboard</a>
-        <a href="#" onclick="showPage('task-page')">🎯 Earn Points</a>
-        <a href="#" onclick="showPage('ref-page')">👥 Referrals</a>
-        <a href="#" onclick="showPage('wallet-page')">💰 Withdraw / Bank</a>
-        <a href="#" onclick="logout()" style="color: #ff4444;">🚪 Logout</a>
+        <div style="padding: 30px 20px; border-bottom: 1px solid #333;">
+            <div id="id-display" style="font-weight:bold; color:var(--gold);">ID: #------</div>
+            <div id="email-display" style="font-size:0.8rem; color:#666;">...</div>
+        </div>
+        <a href="#" onclick="showPage('wallet-page')" style="display:block; padding:18px 25px; color:white; text-decoration:none;">💳 Withdrawal Settings</a>
+        <a href="#" onclick="logout()" style="display:block; padding:18px 25px; color:#ff4444; text-decoration:none;">🚪 Logout</a>
     </div>
 
-    <div id="auth-screen">
-        <h1 style="color:var(--gold);">Theophos Rewards</h1>
-        <p style="color:#666;">Login to access your earning dashboard</p>
-        <div style="max-width: 400px; margin: auto;">
+    <div class="top-bar hidden" id="top-nav">
+        <div onclick="toggleSidebar()" style="cursor:pointer; color:var(--gold); font-size:1.5rem;">☰</div>
+        <div style="font-weight:900; letter-spacing:1px; color:var(--gold);">THEOPHOS</div>
+        <div style="width:24px;"></div>
+    </div>
+
+    <div id="auth-screen" style="padding: 60px 20px; text-align: center;">
+        <h1 style="color:var(--gold); font-size: 2.4rem; margin:0;">Theophos</h1>
+        <p style="color:#555; margin-bottom:40px;">Member Access Required</p>
+        <div style="max-width:360px; margin:auto;">
             <input type="email" id="email" placeholder="Email Address">
-            <input type="password" id="password" placeholder="Password">
-            <button class="primary-btn" onclick="handleAuth()">Access Account</button>
+            <input type="password" id="password" placeholder="Account Password">
+            <button class="btn-withdraw" onclick="handleAuth()">Enter Portal</button>
         </div>
     </div>
 
-    <div id="app-structure" class="hidden">
-        <div class="top-nav">
-            <div class="menu-btn" onclick="toggleSidebar()">☰</div>
-            <div style="font-weight: bold; color: var(--gold);">THEOPHOS</div>
-            <div id="id-tag" style="font-size: 0.7rem; color: #888;">ID: #0000</div>
-        </div>
-
-        <div id="dash-page" class="page active">
-            <div class="stat-card">
-                <small>CURRENT BALANCE</small>
-                <div class="points-big" id="user-pts">0</div>
-                <div style="color: #888;">Points Earned Today</div>
+    <div id="main-app" class="hidden">
+        
+        <div id="home-page" class="page active">
+            <div class="balance-box">
+                <small style="color:#777; letter-spacing:1px;">AVAILABLE POINTS</small>
+                <div style="font-size: 3.5rem; font-weight: 900; color: var(--gold); margin: 5px 0;" id="user-pts">0</div>
+                <div style="font-size:0.75rem; color:#555;">Next Payout Target: 1,000 Pts</div>
             </div>
-            <button class="primary-btn" onclick="showPage('task-page')">Start Earning Now</button>
+
+            <div style="background:#111; padding:20px; border-radius:20px; border:1px dashed #333;">
+                <span style="font-size:0.8rem; color:#888;">Your Referral Link (+50 Pts)</span>
+                <div id="ref-link" style="color:var(--gold); font-size:0.75rem; margin-top:8px; word-break:break-all;">...</div>
+            </div>
         </div>
 
         <div id="task-page" class="page">
-            <h3>Available Tasks</h3>
+            <h3 style="margin-top:0;">Task Center</h3>
             
-            <div class="company-box">
-                <span class="company-title">OGAds Network</span>
-                <div class="task-row" onclick="call_locker()">
-                    <div><b>Verification Task 1</b><br><small style="color:#666;">Complete human check</small></div>
-                    <div class="btn-go">+15 Pts</div>
-                </div>
-                <div class="task-row" onclick="location.href='https://applocked.store/sl/n1xyw'">
-                    <div><b>Smart Wall Task 2</b><br><small style="color:#666;">Explore offers</small></div>
-                    <div class="btn-go">+10 Pts</div>
-                </div>
+            <span class="company-tag">OGAds Verification</span>
+            <div class="task-card" onclick="call_locker()">
+                <div class="task-info"><b>Content Unlocker</b><small>Complete 1 survey</small></div>
+                <div class="point-pill">+15 Pts</div>
             </div>
 
-            <div class="company-box">
-                <span class="company-title">CPAGrip Network</span>
-                <div class="task-row" onclick="load_locker()">
-                    <div><b>Video Reward Task</b><br><small style="color:#666;">Watch & Unlock</small></div>
-                    <div class="btn-go">+15 Pts</div>
-                </div>
-                <div class="task-row" onclick="location.href='https://playabledownload.com/1866359'">
-                    <div><b>Survey Discovery</b><br><small style="color:#666;">Global research</small></div>
-                    <div class="btn-go">+10 Pts</div>
-                </div>
+            <span class="company-tag">CPAGrip Media</span>
+            <div class="task-card" onclick="load_locker()">
+                <div class="task-info"><b>Premium Video</b><small>Watch to end</small></div>
+                <div class="point-pill">+15 Pts</div>
             </div>
 
-            <div class="company-box">
-                <span class="company-title">Adsterra Ads</span>
-                <div class="task-row" onclick="window.open('https://pl28368305.effectivegatecpm.com/9e/81/39/9e8139365ea358b64f4023c6b4d1074a.js')">
-                    <div><b>Native Ad Click</b><br><small style="color:#666;">Visit & Stay 30s</small></div>
-                    <div class="btn-go">+5 Pts</div>
-                </div>
-            </div>
-        </div>
-
-        <div id="ref-page" class="page">
-            <h3>Refer & Earn</h3>
-            <div class="ref-container">
-                <p>Invite a friend and receive <b>50 Points</b> instantly when they join.</p>
-                <div class="ref-link-box" id="ref-link">Generating...</div>
+            <span class="company-tag">Adsterra Tasks</span>
+            <div class="task-card" onclick="window.open('https://pl28368305.effectivegatecpm.com/9e/81/39/9e8139365ea358b64f4023c6b4d1074a.js')">
+                <div class="task-info"><b>Social Reward Link</b><small>Stay 30 seconds</small></div>
+                <div class="point-pill">+5 Pts</div>
             </div>
         </div>
 
         <div id="wallet-page" class="page">
-            <h3>Payment Settings</h3>
-            <label style="font-size:0.8rem; color:#888;">Payout Country</label>
-            <select id="country" onchange="updateProfile()">
-                <option value="">Choose Country</option>
-                <option value="GH">Ghana (Target: 1,000 Pts = 200 GHC)</option>
-                <option value="NG">Nigeria (Target: 1,000 Pts = 7,000 NGN)</option>
-            </select>
+            <h3>Withdrawal Settings</h3>
+            <p style="font-size:0.8rem; color:#666;">Set your payment details below. Minimum withdrawal is 1,000 Points.</p>
             
-            <label style="font-size:0.8rem; color:#888;">Withdrawal Information</label>
-            <input type="text" id="bank" placeholder="Account Number / Momo Name" onchange="updateProfile()">
-            <p style="font-size: 0.7rem; color: #555;">Payments are processed every Friday.</p>
+            <select id="country" onchange="updateProfile()">
+                <option value="">-- Select Country --</option>
+                <option value="GH">Ghana (MTN/AirtelTigo)</option>
+                <option value="NG">Nigeria (Bank Transfer)</option>
+            </select>
+            <input type="text" id="bank" placeholder="Momo Number or Bank Account" onchange="updateProfile()">
+            
+            <button class="btn-withdraw" style="background:#222; color:white; border:1px solid #444;" onclick="alert('Balance insufficient for withdrawal.')">Request Payout</button>
         </div>
+    </div>
+
+    <div class="bottom-nav hidden" id="bottom-bar">
+        <div class="nav-item active" onclick="showPage('home-page', this)"><i>🏠</i>Home</div>
+        <div class="nav-item" onclick="showPage('task-page', this)"><i>🎯</i>Tasks</div>
+        <div class="nav-item" onclick="showPage('wallet-page', this)"><i>💰</i>Wallet</div>
     </div>
 
     <script type="module">
@@ -161,19 +144,23 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // UI Logic
+        // Sidebar & Page Logic
         window.toggleSidebar = () => document.getElementById('sidebar').classList.toggle('active');
-        window.showPage = (id) => {
+        window.showPage = (id, el) => {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById(id).classList.add('active');
+            if(el) {
+                document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+                el.classList.add('active');
+            }
             document.getElementById('sidebar').classList.remove('active');
         };
 
-        // Authentication
+        // Auth & Launch
         window.handleAuth = async () => {
             const email = document.getElementById('email').value.toLowerCase().trim();
             const pass = document.getElementById('password').value;
-            if(!email || !pass) return alert("Enter details");
+            if(!email || !pass) return alert("Fill details!");
 
             const userRef = doc(db, "users", email);
             const userSnap = await getDoc(userRef);
@@ -181,14 +168,13 @@
             if (userSnap.exists()) {
                 if (userSnap.data().password === pass) { launch(email); } else { alert("Wrong password"); }
             } else {
-                const userId = Math.floor(1000 + Math.random() * 9000);
+                const userId = Math.floor(100000 + Math.random() * 900000);
                 await setDoc(userRef, { email, password: pass, points: 0, userId, bank: "", country: "" });
                 
-                // Referral Logic
-                const refCode = new URLSearchParams(window.location.search).get('ref');
-                if(refCode && refCode !== email) {
-                    await updateDoc(doc(db, "users", refCode), { points: increment(50) });
-                }
+                // Referral Bonus
+                const ref = new URLSearchParams(window.location.search).get('ref');
+                if(ref && ref !== email) await updateDoc(doc(db, "users", ref), { points: increment(50) });
+                
                 launch(email);
             }
         };
@@ -196,33 +182,34 @@
         function launch(email) {
             localStorage.setItem("theophos_session", email);
             document.getElementById('auth-screen').classList.add('hidden');
-            document.getElementById('app-structure').classList.remove('hidden');
+            document.getElementById('main-app').classList.remove('hidden');
+            document.getElementById('top-nav').classList.remove('hidden');
+            document.getElementById('bottom-bar').classList.remove('hidden');
+            
             document.getElementById('ref-link').innerText = window.location.href.split('?')[0] + "?ref=" + email;
+            document.getElementById('email-display').innerText = email;
 
             onSnapshot(doc(db, "users", email), (doc) => {
                 if(doc.exists()) {
                     const data = doc.data();
                     document.getElementById('user-pts').innerText = data.points;
-                    document.getElementById('id-tag').innerText = "ID: #" + data.userId;
+                    document.getElementById('id-display').innerText = "ID: #" + data.userId;
                     document.getElementById('bank').value = data.bank || "";
                     document.getElementById('country').value = data.country || "";
                 }
             });
 
-            // Adsterra Pop-under loads ONLY after login
-            var script = document.createElement('script');
-            script.src = 'https://pl28368305.effectivegatecpm.com/9e/81/39/9e8139365ea358b64f4023c6b4d1074a.js';
-            document.body.appendChild(script);
-        }
-
-        // Auto-add points if redirected back with ?task=success
-        if (window.location.search.includes('task=success')) {
-            const email = localStorage.getItem("theophos_session");
-            if(email) {
+            // Point Verification Check
+            if (window.location.search.includes('task=verified')) {
                 updateDoc(doc(db, "users", email), { points: increment(15) });
-                alert("Task Verified! Points Added.");
+                alert("Task Verified! +15 Points added.");
                 window.history.replaceState({}, document.title, window.location.pathname);
             }
+
+            // Adsterra Load
+            var s = document.createElement('script');
+            s.src = 'https://pl28368305.effectivegatecpm.com/9e/81/39/9e8139365ea358b64f4023c6b4d1074a.js';
+            document.body.appendChild(s);
         }
 
         window.updateProfile = async () => {
@@ -234,8 +221,8 @@
         };
 
         window.logout = () => { localStorage.removeItem("theophos_session"); location.reload(); };
-        const session = localStorage.getItem("theophos_session");
-        if(session) launch(session);
+        const saved = localStorage.getItem("theophos_session");
+        if(saved) launch(saved);
     </script>
 </body>
 </html>
