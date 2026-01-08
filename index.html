@@ -3,103 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Theophos Rewards</title>
+    <title>Theophos AI - Earning Center</title>
     
-    <script type="text/javascript" src="https://applocked.store/cp/js/kpp1r"></script> <script src="https://lockedapp.space/cl/js/i/4oo7xj"></script> <style>
-        :root { --gold: #FFD700; --bg: #0b0b0b; --card: #151515; }
-        body { font-family: 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: white; margin: 0; padding-bottom: 80px; }
-        .container { max-width: 480px; margin: auto; padding: 20px; }
-        
-        /* Header & Balance */
-        .header { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #222; }
-        .balance-card { background: linear-gradient(145deg, #1a1a1a, #000); padding: 35px 20px; border-radius: 24px; text-align: center; margin: 20px 0; border: 1px solid #333; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .balance-amount { font-size: 3rem; font-weight: 800; color: var(--gold); }
+    <script type="text/javascript" src="https://applocked.store/cp/js/kpp1r"></script>
+    <script src="https://lockedapp.space/cl/js/i/4oo7xj"></script>
 
-        /* Task List */
-        .section-title { font-size: 0.8rem; color: #666; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; }
-        .bundle-box { background: var(--card); border-radius: 18px; padding: 20px; margin-bottom: 15px; border: 1px solid #222; transition: 0.3s; }
-        .bundle-box:active { transform: scale(0.98); background: #1a1a1a; }
+    <style>
+        :root { --gold: #FFD700; --bg: #0d0d0d; --card: #1a1a1a; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: white; margin: 0; padding-bottom: 70px; }
+        .container { max-width: 500px; margin: auto; padding: 20px; }
         
-        /* Sub-Task Styles */
-        .sub-task-row { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #222; }
-        .sub-task-row:last-child { border-bottom: none; }
-        .btn-start { background: var(--gold); color: black; border: none; padding: 8px 16px; border-radius: 8px; font-weight: bold; cursor: pointer; }
-        .btn-start.completed { background: #4CAF50; color: white; }
+        /* Balance Section */
+        .balance-hero { background: linear-gradient(135deg, #222, #000); padding: 40px 20px; border-radius: 25px; text-align: center; border: 1px solid #333; margin-top: 20px; }
+        .balance-hero h1 { font-size: 3.5rem; margin: 10px 0; color: var(--gold); }
 
-        /* Navigation */
-        .nav { position: fixed; bottom: 0; width: 100%; background: #111; display: flex; justify-content: space-around; padding: 15px 0; border-top: 1px solid #222; z-index: 1000; }
-        .nav-item { color: #555; text-align: center; font-size: 0.7rem; }
-        .nav-item.active { color: var(--gold); }
+        /* Task Cards */
+        .offer-card { background: var(--card); border-radius: 20px; padding: 20px; margin-bottom: 15px; border: 1px solid #222; display: flex; justify-content: space-between; align-items: center; }
+        .offer-info b { display: block; font-size: 1rem; color: var(--gold); }
+        .offer-info span { font-size: 0.8rem; color: #777; }
+        .btn-earn { background: var(--gold); color: black; border: none; padding: 12px 20px; border-radius: 12px; font-weight: bold; cursor: pointer; }
 
-        .page { display: none; animation: slideUp 0.3s ease; }
-        .page.active { display: block; }
-        @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        
         .hidden { display: none !important; }
-        input { width: 100%; padding: 15px; margin-bottom: 15px; border-radius: 12px; border: 1px solid #333; background: #1a1a1a; color: white; }
+        input { width: 100%; padding: 15px; margin-bottom: 10px; border-radius: 10px; border: 1px solid #333; background: #222; color: white; box-sizing: border-box; }
     </style>
 </head>
 <body>
 
-    <div id="auth-page" class="container" style="padding-top: 100px; text-align: center;">
-        <h1 style="color:var(--gold); font-size: 2.5rem;">Theophos</h1>
-        <p style="color:#666;">Enter your details to start earning</p>
-        <input type="email" id="email" placeholder="Email Address">
-        <input type="password" id="password" placeholder="Account Password">
-        <button onclick="handleAuth()" style="width:100%; padding:18px; background:var(--gold); border:none; border-radius:12px; font-weight:bold; font-size:1rem;">Access Dashboard</button>
-    </div>
-
-    <div id="app-content" class="hidden">
-        
-        <div id="home-page" class="page active container">
-            <div class="header">
-                <span style="font-weight:900; color:var(--gold);">THEOPHOS AI</span>
-                <span id="user-id" style="font-size:0.7rem; color:#444;">ID: #------</span>
-            </div>
-
-            <div class="balance-card">
-                <small style="color:#666;">EARNED POINTS</small>
-                <div class="balance-amount" id="pts-display">0</div>
-            </div>
-
-            <div class="section-title">Available Task Bundles</div>
-            
-            <div class="bundle-box" onclick="openBundle('ogads')">
-                <div style="font-weight:bold;">Task 1: OGAds Bundle</div>
-                <div style="font-size:0.8rem; color:#666;">Verify with 3 different actions</div>
-                <div style="color:var(--gold); font-size:0.8rem; margin-top:10px;">Reward: +40 Pts</div>
-            </div>
-
-            <div class="bundle-box" onclick="openBundle('cpagrip')">
-                <div style="font-weight:bold;">Task 2: CPAGrip Bundle</div>
-                <div style="font-size:0.8rem; color:#666;">Watch and unlock premium content</div>
-                <div style="color:var(--gold); font-size:0.8rem; margin-top:10px;">Reward: +40 Pts</div>
-            </div>
-        </div>
-
-        <div id="task-page" class="page container">
-            <button onclick="showPage('home-page')" style="background:none; border:none; color:var(--gold); margin: 20px 0;">← Back to Home</button>
-            <h2 id="bundle-title">Network Bundle</h2>
-            
-            <div id="sub-task-container"></div>
-            
-            <div id="captcha-area" class="hidden" style="margin-top:20px;">
-                <div class="section-title">Security Check</div>
-                <div data-captcha-enable="true"></div>
-            </div>
-
-            <button id="claim-btn" class="hidden" onclick="claimPoints()" style="width:100%; padding:20px; background:#4CAF50; color:white; border:none; border-radius:15px; font-weight:bold; margin-top:30px;">CLAIM BUNDLE POINTS</button>
-        </div>
-
-        <div class="nav">
-            <div class="nav-item active" onclick="showPage('home-page')">🏠<br>Home</div>
-            <div class="nav-item" onclick="alert('Wallet opens at 1,000 points')">💰<br>Wallet</div>
+    <div id="auth-screen" class="container" style="text-align:center; padding-top:100px;">
+        <h1 style="color:var(--gold);">Theophos AI</h1>
+        <div id="login-box">
+            <input type="email" id="email" placeholder="Email Address">
+            <input type="password" id="password" placeholder="Password">
+            <button onclick="handleAuth()" class="btn-earn" style="width:100%; margin-top:10px;">Enter Dashboard</button>
         </div>
     </div>
 
-    <div class="hidden">
-        <script type="text/javascript" src="https://playabledownload.com/script_include.php?id=1866349"></script>
-        <script type="text/javascript" src="https://playabledownload.com/script_include.php?id=1866355"></script>
+    <div id="main-app" class="hidden container">
+        <div class="balance-hero">
+            <span>TOTAL EARNINGS</span>
+            <h1 id="user-pts">0</h1>
+            <small style="color:#555;">ID: #<span id="display-id">000000</span></small>
+        </div>
+
+        <h3 style="margin: 30px 0 15px;">Tasks Zone 1 (High Pay)</h3>
+
+        <div class="offer-card">
+            <div class="offer-info">
+                <b>OGAds Offerwall</b>
+                <span>Complete 1 offer to earn</span>
+            </div>
+            <button class="btn-earn" onclick="call_locker()">+40 Pts</button>
+        </div>
+
+        <div class="offer-card">
+            <div class="offer-info">
+                <b>CPAGrip Video</b>
+                <span>Watch video to unlock</span>
+            </div>
+            <button class="btn-earn" onclick="window.open('https://playabledownload.com/1866359')">+40 Pts</button>
+        </div>
+
+        <div class="offer-card">
+            <div class="offer-info">
+                <b>Social Earning Link</b>
+                <span>Stay for 30 seconds</span>
+            </div>
+            <button class="btn-earn" onclick="window.open('https://pl28368305.effectivegatecpm.com/9e/81/39/9e8139365ea358b64f4023c6b4d1074a.js')">+10 Pts</button>
+        </div>
+
+        <div style="margin-top:40px; text-align:center;">
+            <p style="color:#666; font-size:0.8rem;">Completed a task but points didn't add?</p>
+            <button onclick="checkVerification()" style="background:#222; color:var(--gold); border:1px solid #444; padding:10px 20px; border-radius:10px; font-size:0.8rem;">Sync Points Now</button>
+        </div>
     </div>
 
     <script type="module">
@@ -117,109 +92,57 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
-        let currentUser = null;
-        let tasksDone = 0;
-
-        const bundles = {
-            ogads: {
-                title: "OGAds Network",
-                points: 40,
-                tasks: [
-                    { name: "Verify with Content Locker", action: () => { call_locker(); markTask(0); } },
-                    { name: "Unlock via OGAds Smartlink", action: () => { window.open('https://lockedapp.org/sl/n1xyw'); markTask(1); } },
-                    { name: "Complete Captcha Below", action: () => { markTask(2); } }
-                ]
-            },
-            cpagrip: {
-                title: "CPAGrip Network",
-                points: 40,
-                tasks: [
-                    { name: "Play Video Reward", action: () => { load_locker(); markTask(0); } },
-                    { name: "Check CPAGrip Offer", action: () => { /* 1866355 trigger */ markTask(1); } },
-                    { name: "Smartlink Discovery", action: () => { window.open('https://playabledownload.com/1866359'); markTask(2); } }
-                ]
-            }
-        };
-
-        window.showPage = (id) => {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-        };
+        let userEmail = "";
 
         window.handleAuth = async () => {
             const email = document.getElementById('email').value.toLowerCase().trim();
             const pass = document.getElementById('password').value;
-            if(!email || !pass) return alert("Please fill both fields");
+            if(!email || !pass) return alert("Enter details");
 
             const userRef = doc(db, "users", email);
             const snap = await getDoc(userRef);
 
-            if(snap.exists()) {
-                if(snap.data().password === pass) login(email);
-                else alert("Incorrect Password");
+            if(snap.exists()){
+                if(snap.data().password === pass) launch(email);
+                else alert("Wrong password");
             } else {
-                await setDoc(userRef, { email, password: pass, points: 0, userId: Math.floor(100000 + Math.random()*900000) });
-                login(email);
+                await setDoc(userRef, { email, password: pass, points: 0, userId: Math.floor(Math.random()*900000) });
+                launch(email);
             }
         };
 
-        function login(email) {
-            currentUser = email;
-            document.getElementById('auth-page').classList.add('hidden');
-            document.getElementById('app-content').classList.remove('hidden');
-            
+        function launch(email) {
+            userEmail = email;
+            localStorage.setItem("theophos_user", email);
+            document.getElementById('auth-screen').classList.add('hidden');
+            document.getElementById('main-app').classList.remove('hidden');
+
             onSnapshot(doc(db, "users", email), (doc) => {
-                document.getElementById('pts-display').innerText = doc.data().points;
-                document.getElementById('user-id').innerText = "ID: #" + doc.data().userId;
-            });
-        }
-
-        window.openBundle = (key) => {
-            tasksDone = 0;
-            const bundle = bundles[key];
-            document.getElementById('bundle-title').innerText = bundle.title;
-            const container = document.getElementById('sub-task-container');
-            container.innerHTML = "";
-            
-            bundle.tasks.forEach((t, i) => {
-                const row = document.createElement('div');
-                row.className = "sub-task-row";
-                row.innerHTML = `<span>${t.name}</span><button class="btn-start" id="tbtn-${i}" onclick="runTask('${key}', ${i})">Start</button>`;
-                container.appendChild(row);
+                if(doc.exists()) {
+                    document.getElementById('user-pts').innerText = doc.data().points;
+                    document.getElementById('display-id').innerText = doc.data().userId;
+                }
             });
 
-            if(key === 'ogads') document.getElementById('captcha-area').classList.remove('hidden');
-            else document.getElementById('captcha-area').classList.add('hidden');
-
-            document.getElementById('claim-btn').classList.add('hidden');
-            showPage('task-page');
-            window.activeBundleKey = key;
-        };
-
-        window.runTask = (key, index) => {
-            bundles[key].tasks[index].action();
-        };
-
-        function markTask(index) {
-            const btn = document.getElementById(`tbtn-${index}`);
-            if(btn && !btn.classList.contains('completed')) {
-                btn.classList.add('completed');
-                btn.innerText = "✅ Done";
-                tasksDone++;
-                if(tasksDone >= 3) document.getElementById('claim-btn').classList.remove('hidden');
+            // CHECK IF REDIRECTED FROM OFFER
+            if(window.location.search.includes('task=verified')) {
+                updateDoc(doc(db, "users", email), { points: increment(40) });
+                alert("Success! +40 Points Added.");
+                window.history.replaceState({}, document.title, window.location.pathname);
             }
         }
 
-        window.claimPoints = async () => {
-            const bundleKey = window.activeBundleKey;
-            const pts = bundles[bundleKey].points;
-            await updateDoc(doc(db, "users", currentUser), { points: increment(pts) });
-            alert("Bundle Complete! Points Added.");
-            showPage('home-page');
+        window.checkVerification = () => {
+            // This manually checks if they were supposed to get points
+            if(window.location.search.includes('task=verified')) {
+                alert("Points already synced!");
+            } else {
+                alert("No new completions found. Please finish an offer first.");
+            }
         };
 
-        // Network Callbacks (Auto-points if the user finishes the actual locker)
-        window.ogads_complete = () => { if(currentUser) updateDoc(doc(db, "users", currentUser), { points: increment(15) }); };
+        const saved = localStorage.getItem("theophos_user");
+        if(saved) launch(saved);
     </script>
 </body>
 </html>
